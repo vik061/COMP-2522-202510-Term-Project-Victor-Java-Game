@@ -1,7 +1,9 @@
 package com.example.comp2522202510termprojectvictorjavagame;
 
 import javafx.application.Application;
+import javafx.scene.control.Button;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -10,11 +12,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Game extends Application {
-    public static final int spaceSize=70, width=10, height=10;
+    public static final int spaceSize=40, width=10, height=10;
+    public static final int buttonLine = height * spaceSize + 35;
+    public static final int descriptionLine = buttonLine - 20;
 
     private Pane createContent() {
         Pane root = new Pane();
-        root.setPrefSize(width * spaceSize, height * spaceSize + 50);
+        root.setPrefSize(width * spaceSize, height * spaceSize + 100);
 
         for (int index = 0; index < height; index++) {
             for (int j_index = 0; j_index < width; j_index++) {
@@ -30,8 +34,26 @@ public class Game extends Application {
         gameBoard.setImage(image);
         gameBoard.setFitHeight(height * spaceSize);
         gameBoard.setFitWidth(width * spaceSize);
-        
-        root.getChildren().add(gameBoard);
+
+        Button playerButton = new Button("Player One");
+        Button startButton = new Button("Start");
+
+        playerButton.setTranslateY(buttonLine);
+        playerButton.setTranslateX(80);
+        startButton.setTranslateY(buttonLine);
+        startButton.setTranslateX(270);
+
+        Label playerLabel = new Label("Your Turn");
+        Label startLabel = new Label("Start");
+
+        playerLabel.setTranslateY(descriptionLine);
+        playerLabel.setTranslateX(89);
+        startLabel.setTranslateY(descriptionLine);
+        startLabel.setTranslateX(277);
+
+        root.getChildren().addAll(gameBoard,
+                playerButton, startButton,
+                playerLabel, startLabel);
 
         return root;
     }
