@@ -2,13 +2,15 @@ package com.example.comp2522202510termprojectvictorjavagame;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class Game extends Application {
-    public static final int spaceSize=40, width=10, height=10;
+    public static final int spaceSize=70, width=10, height=10;
 
     private Pane createContent() {
         Pane root = new Pane();
@@ -22,6 +24,14 @@ public class Game extends Application {
                 root.getChildren().addAll(space);
             }
         }
+
+        Image image = new Image("C:\\Users\\vik06\\IdeaProjects\\COMP-2522-202510-Term-Project-Victor-Java-Game\\src\\main\\COMP2522GameBoard.png");
+        ImageView gameBoard = new ImageView();
+        gameBoard.setImage(image);
+        gameBoard.setFitHeight(height * spaceSize);
+        gameBoard.setFitWidth(width * spaceSize);
+        
+        root.getChildren().add(gameBoard);
 
         return root;
     }
