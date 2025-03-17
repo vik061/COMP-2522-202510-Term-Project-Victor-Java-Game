@@ -36,24 +36,37 @@ public class Game extends Application {
         gameBoard.setFitWidth(width * spaceSize);
 
         Button playerButton = new Button("Player One");
+        Button diceButton = new Button("Roll Dice");
         Button startButton = new Button("Start");
 
+
         playerButton.setTranslateY(buttonLine);
-        playerButton.setTranslateX(80);
+        playerButton.setTranslateX(45);
+        diceButton.setTranslateY(buttonLine);
+        diceButton.setTranslateX(160);
         startButton.setTranslateY(buttonLine);
         startButton.setTranslateX(270);
 
         Label playerLabel = new Label("Your Turn");
+        Label diceLabel = new Label("Dice");
         Label startLabel = new Label("Start");
 
         playerLabel.setTranslateY(descriptionLine);
-        playerLabel.setTranslateX(89);
+        playerLabel.setTranslateX(55);
+        diceLabel.setTranslateY(descriptionLine);
+        diceLabel.setTranslateX(175);
         startLabel.setTranslateY(descriptionLine);
         startLabel.setTranslateX(277);
 
+        diceButton.setOnAction(event -> {
+            int value = Dice.rollDice();
+            System.out.println("Dice: " + value);
+            diceLabel.setText("Dice: " + value);
+        });
+
         root.getChildren().addAll(gameBoard,
-                playerButton, startButton,
-                playerLabel, startLabel);
+                playerButton, diceButton, startButton,
+                playerLabel, diceLabel, startLabel);
 
         return root;
     }
