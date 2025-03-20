@@ -5,7 +5,8 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 
 public class Board {
-    public ArrayList<Pair<Integer, Integer>> coordinates;
+    private ArrayList<Pair<Integer, Integer>> coordinates;
+    private static final int winNumber = 100;
 
     public Board() {
         coordinates = new ArrayList<>();
@@ -27,7 +28,20 @@ public class Board {
                 coordinates.add(new Pair<>(xCoord, yCoord));
             }
         }
+    }
 
+    public int getXCoordinate(final int position) {
+        if (position >= 1 && position <= winNumber) {
+            return coordinates.get(position).getKey();
+        }
+        return -1;
+    }
+
+    public int getYCoordinate(final int position) {
+        if (position >= 1 && position <= winNumber) {
+            return coordinates.get(position).getValue();
+        }
+        return -1;
     }
 //    public static void main(String[] args) {
 //        Board board = new Board();
