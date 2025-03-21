@@ -4,17 +4,20 @@ import java.util.Random;
 
 public class OmnipotentSpace extends Space {
     int omnipotentPosition;
+    private static final int winNumber = 100;
 
     public OmnipotentSpace(int omnipotentPosition, int position, boolean isStart, boolean isEnd, boolean isOmnipotentSix) {
         super(position, isStart, isEnd, isOmnipotentSix);
         this.omnipotentPosition = omnipotentPosition;
     }
 
-    public int determineNewPosition(int omnipotentPosition) {
-        final int maximum = 5;
-        final int minimum = -5;
+    public static int determineNewPosition(final int omnipotentPosition) {
         Random random = new Random();
-        int omnipotentForce = (random.nextInt() - 1) * (random.nextInt(maximum - minimum) - maximum);
-        return omnipotentForce;
+        int omnipotentForce = omnipotentPosition + (random.nextInt(2) * 2 - 1);
+        if (omnipotentForce > winNumber) {
+            return ((winNumber - omnipotentPosition) - (omnipotentForce - winNumber) + omnipotentPosition);
+        } else {
+            return omnipotentForce;
+        }
     }
 }
