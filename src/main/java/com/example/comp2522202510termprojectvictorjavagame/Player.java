@@ -1,5 +1,7 @@
 package com.example.comp2522202510termprojectvictorjavagame;
 
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -29,22 +31,34 @@ public class Player {
         if (position + dieValue <= winNumber) {
             position += dieValue;
 
+            TranslateTransition firstMove = moveAnimation(dieValue);
+            TranslateTransition secondMove = null;
+
             int newPosition = gameBoard.getNewPosition(position);
             if (newPosition != position && newPosition != -1) {
                 position = newPosition;
                 // consider having JavaFX label
-                moveAnimation(6);
+                secondMove = moveAnimation(6);
+            }
+            if (secondMove == null) {
+                firstMove.play();
+            } else {
+                SequentialTransition sequentialTransition = new SequentialTransition(firstMove,
+                        new PauseTransition(Duration.millis(800)), secondMove
+                );
+                sequentialTransition.play();
             }
         }
         moveAnimation(dieValue);
     }
 
-    private void moveAnimation(final int dieValue) {
+    private TranslateTransition moveAnimation(final int dieValue) {
         TranslateTransition move = new TranslateTransition(Duration.millis(200 * dieValue), playerPiece);
         move.setToX(gameBoard.getXCoordinate(position));
         move.setToY(gameBoard.getYCoordinate(position));
         move.setAutoReverse(false);
-        move.play();
+        // move.play();
+        return move;
     }
 
     public Circle getPlayerPiece() {
