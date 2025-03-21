@@ -6,7 +6,10 @@ import java.util.ArrayList;
 
 public class Board {
     private ArrayList<Pair<Integer, Integer>> coordinates;
+    private ArrayList<Integer> omnipotentSpaces;
     private static final int winNumber = 100;
+    private static final int omnipotentNumber = 6;
+
 
     public Board() {
         coordinates = new ArrayList<>();
@@ -26,6 +29,17 @@ public class Board {
 
                 int yCoord = Game.spaceSize * Game.height - (heightIndex * Game.spaceSize) - Game.spaceSize / 2;
                 coordinates.add(new Pair<>(xCoord, yCoord));
+            }
+        }
+    }
+
+    private void createOmnipotentSpaces() {
+        omnipotentSpaces = new ArrayList<>();
+        for (int index = 0; index <= winNumber; index++) {
+            omnipotentSpaces.add(index);
+
+            if (index % omnipotentNumber == 0) {
+                omnipotentSpaces.set(index, OmnipotentSpace.determineNewPosition(index));
             }
         }
     }
