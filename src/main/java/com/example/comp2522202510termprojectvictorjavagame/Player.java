@@ -14,7 +14,8 @@ public class Player {
     public Player(int spaceSize, final Color pieceColor) {
         playerPiece = new Circle(spaceSize / 2);
         playerPiece.setFill(pieceColor);
-        position = 1;
+        position = 0;
+        setPlayerPosition(1);
         finishedGame = (position == winNumber);
     }
 
