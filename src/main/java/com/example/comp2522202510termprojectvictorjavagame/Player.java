@@ -1,7 +1,9 @@
 package com.example.comp2522202510termprojectvictorjavagame;
 
+import javafx.animation.TranslateTransition;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 
 public class Player {
@@ -27,11 +29,15 @@ public class Player {
         if (position + dieValue <= winNumber) {
             position += dieValue;
         }
-        int xCoord = gameBoard.getXCoordinate(position);
-        int yCoord = gameBoard.getYCoordinate(position);
-        playerPiece.setTranslateX(xCoord);
-        playerPiece.setTranslateY(yCoord);
+        moveAnimation(dieValue);
+    }
 
+    private void moveAnimation(final int dieValue) {
+        TranslateTransition move = new TranslateTransition(Duration.millis(200 * dieValue), playerPiece);
+        move.setToX(gameBoard.getXCoordinate(position));
+        move.setToY(gameBoard.getYCoordinate(position));
+        move.setAutoReverse(false);
+        move.play();
     }
 
     public Circle getPlayerPiece() {
