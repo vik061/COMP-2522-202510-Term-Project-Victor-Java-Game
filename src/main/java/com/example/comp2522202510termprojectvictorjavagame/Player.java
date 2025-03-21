@@ -28,6 +28,13 @@ public class Player {
     public void setPlayerPosition(final int dieValue) {
         if (position + dieValue <= winNumber) {
             position += dieValue;
+
+            int newPosition = gameBoard.getNewPosition(position);
+            if (newPosition != position && newPosition != -1) {
+                position = newPosition;
+                // consider having JavaFX label
+                moveAnimation(6);
+            }
         }
         moveAnimation(dieValue);
     }
