@@ -14,6 +14,7 @@ public class Board {
     public Board() {
         coordinates = new ArrayList<>();
         createCoordinates();
+        createOmnipotentSpaces();
     }
 
     private void createCoordinates() {
@@ -42,6 +43,13 @@ public class Board {
                 omnipotentSpaces.set(index, OmnipotentSpace.determineNewPosition(index));
             }
         }
+    }
+
+    public int getNewPosition(int currentPosition) {
+        if (currentPosition > 0 && currentPosition <= 100) {
+            return omnipotentSpaces.get(currentPosition);
+        }
+        return -1;
     }
 
     public int getXCoordinate(final int position) {
