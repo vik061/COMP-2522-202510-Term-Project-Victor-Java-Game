@@ -13,4 +13,4 @@ vik061
 
 Using Java 23 is recommended for this game. Other Java versions may work as well.
 
-Required libGDX version: [Work in progress]
+This game was created using JavaFX and IntelliJ IDE. Using IntelliJ IDE to run this game is strongly recommended.
