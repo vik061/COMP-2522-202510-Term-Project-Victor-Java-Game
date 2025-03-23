@@ -13,14 +13,14 @@ public class Player {
     private int position;
     private boolean finishedGame;
     private static Board gameBoard = new Board();
-    private static final int winNumber = 100;
+    private static final int WIN_NUMBER = 100;
 
     public Player(int spaceSize, final Color pieceColor) {
         playerPiece = new Circle(spaceSize / 2);
         playerPiece.setFill(pieceColor);
         position = 0;
         setPlayerPosition(1);
-        finishedGame = (position == winNumber);
+        finishedGame = (position == WIN_NUMBER);
     }
 
     public int getPlayerPosition() {
@@ -28,7 +28,7 @@ public class Player {
     }
 
     public void setPlayerPosition(final int dieValue) {
-        if (position + dieValue <= winNumber) {
+        if (position + dieValue <= WIN_NUMBER) {
             position += dieValue;
 
             TranslateTransition firstMove = moveAnimation(dieValue);
