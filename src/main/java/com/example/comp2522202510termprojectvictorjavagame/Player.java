@@ -9,22 +9,18 @@ import javafx.util.Duration;
 
 
 public class Player {
-    private Circle playerPiece;
+    private final Circle playerPiece;
     private int position;
     private boolean finishedGame;
-    private static Board gameBoard = new Board();
+    private static final Board gameBoard = new Board();
     private static final int WIN_NUMBER = 100;
 
-    public Player(int spaceSize, final Color pieceColor) {
+    public Player(final int spaceSize, final Color pieceColor) {
         playerPiece = new Circle(spaceSize / 2);
         playerPiece.setFill(pieceColor);
         position = 0;
         setPlayerPosition(1);
         finishedGame = (position == WIN_NUMBER);
-    }
-
-    public int getPlayerPosition() {
-        return position;
     }
 
     public void setPlayerPosition(final int dieValue) {
@@ -37,7 +33,6 @@ public class Player {
             int newPosition = gameBoard.getNewPosition(position);
             if (newPosition != position && newPosition != -1) {
                 position = newPosition;
-                // consider having JavaFX label
                 secondMove = moveAnimation(6);
             }
             if (secondMove == null) {
@@ -57,8 +52,16 @@ public class Player {
         move.setToX(gameBoard.getXCoordinate(position));
         move.setToY(gameBoard.getYCoordinate(position));
         move.setAutoReverse(false);
-        // move.play();
         return move;
+    }
+
+    public void returnToStart() {
+        position = 0;
+        setPlayerPosition(1);
+    }
+
+    public boolean reachedEnd() {
+        return position == WIN_NUMBER;
     }
 
     public Circle getPlayerPiece() {
