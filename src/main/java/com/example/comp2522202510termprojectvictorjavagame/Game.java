@@ -15,20 +15,20 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Game extends Application {
-    public static final int spaceSize=40, width=10, height=10;
-    public static final int buttonLine = height * spaceSize + 35;
-    public static final int descriptionLine = buttonLine - 20;
+    public static final int SPACE_SIZE=40, WIDTH=10, HEIGHT=10;
+    public static final int BUTTON_LINE = HEIGHT * SPACE_SIZE + 35;
+    public static final int DESCRIPTION_LINE = BUTTON_LINE - 20;
     private Player playerOne;
 
     private Pane createContent() {
         Pane root = new Pane();
-        root.setPrefSize(width * spaceSize, height * spaceSize + 100);
+        root.setPrefSize(WIDTH * SPACE_SIZE, HEIGHT * SPACE_SIZE + 100);
 
-        for (int index = 0; index < height; index++) {
-            for (int j_index = 0; j_index < width; j_index++) {
-                Space space = new Space(spaceSize, false, false, false);
-                space.SetTranslateX(j_index * spaceSize);
-                space.SetTranslateY(index * spaceSize);
+        for (int index = 0; index < HEIGHT; index++) {
+            for (int jIndex = 0; jIndex < WIDTH; jIndex++) {
+                Space space = new Space(SPACE_SIZE, false, false, false);
+                space.SetTranslateX(jIndex * SPACE_SIZE);
+                space.SetTranslateY(index * SPACE_SIZE);
                 root.getChildren().addAll(space);
             }
         }
@@ -36,30 +36,30 @@ public class Game extends Application {
         Image image = new Image("C:\\Users\\vik06\\IdeaProjects\\COMP-2522-202510-Term-Project-Victor-Java-Game\\src\\main\\COMP2522GameBoard.png");
         ImageView gameBoard = new ImageView();
         gameBoard.setImage(image);
-        gameBoard.setFitHeight(height * spaceSize);
-        gameBoard.setFitWidth(width * spaceSize);
+        gameBoard.setFitHeight(HEIGHT * SPACE_SIZE);
+        gameBoard.setFitWidth(WIDTH * SPACE_SIZE);
 
         Button playerButton = new Button("Player One");
         Button diceButton = new Button("Roll Dice");
         Button startButton = new Button("Start");
 
 
-        playerButton.setTranslateY(buttonLine);
+        playerButton.setTranslateY(BUTTON_LINE);
         playerButton.setTranslateX(160);
-//        diceButton.setTranslateY(buttonLine);
+//        diceButton.setTranslateY(BUTTON_LINE);
 //        diceButton.setTranslateX(160);
-//        startButton.setTranslateY(buttonLine);
+//        startButton.setTranslateY(BUTTON_LINE);
 //        startButton.setTranslateX(270);
 
         Label playerLabel = new Label("Your Turn");
 //        Label diceLabel = new Label("Dice");
 //        Label startLabel = new Label("Start");
 
-        playerLabel.setTranslateY(descriptionLine);
+        playerLabel.setTranslateY(DESCRIPTION_LINE);
         playerLabel.setTranslateX(171);
-//        diceLabel.setTranslateY(descriptionLine);
+//        diceLabel.setTranslateY(DESCRIPTION_LINE);
 //        diceLabel.setTranslateX(175);
-//        startLabel.setTranslateY(descriptionLine);
+//        startLabel.setTranslateY(DESCRIPTION_LINE);
 //        startLabel.setTranslateX(277);
 
 //        diceButton.setOnAction(event -> {
@@ -68,7 +68,7 @@ public class Game extends Application {
 //            diceLabel.setText("Dice: " + value);
 //        });
 
-        playerOne = new Player(spaceSize, Color.BLACK);
+        playerOne = new Player(SPACE_SIZE, Color.BLACK);
 
         playerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -87,7 +87,7 @@ public class Game extends Application {
         return root;
     }
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(final Stage stage) throws IOException {
 //        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         Scene scene = new Scene(createContent());
@@ -96,7 +96,7 @@ public class Game extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         launch();
     }
 }
