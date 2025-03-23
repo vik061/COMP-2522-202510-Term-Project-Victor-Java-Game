@@ -40,33 +40,29 @@ public class Game extends Application {
         gameBoard.setFitWidth(WIDTH * SPACE_SIZE);
 
         Button playerButton = new Button("Player One");
-        Button diceButton = new Button("Roll Dice");
         Button startButton = new Button("Start");
 
+        playerButton.setDisable(true);
+        startButton.setDisable(false);
 
         playerButton.setTranslateY(BUTTON_LINE);
-        playerButton.setTranslateX(160);
-//        diceButton.setTranslateY(BUTTON_LINE);
-//        diceButton.setTranslateX(160);
-//        startButton.setTranslateY(BUTTON_LINE);
-//        startButton.setTranslateX(270);
+        playerButton.setTranslateX(77);
+        startButton.setTranslateY(BUTTON_LINE);
+        startButton.setTranslateX(270);
 
-        Label playerLabel = new Label("Your Turn");
-//        Label diceLabel = new Label("Dice");
-//        Label startLabel = new Label("Start");
+        Label playerLabel = new Label();
+        Label startLabel = new Label("Start");
 
         playerLabel.setTranslateY(DESCRIPTION_LINE);
-        playerLabel.setTranslateX(171);
-//        diceLabel.setTranslateY(DESCRIPTION_LINE);
-//        diceLabel.setTranslateX(175);
-//        startLabel.setTranslateY(DESCRIPTION_LINE);
-//        startLabel.setTranslateX(277);
+        playerLabel.setTranslateX(90);
+        startLabel.setTranslateY(DESCRIPTION_LINE);
+        startLabel.setTranslateX(277);
 
-//        diceButton.setOnAction(event -> {
-//            int value = Dice.rollDice();
-//            System.out.println("Dice: " + value);
-//            diceLabel.setText("Dice: " + value);
-//        });
+        startButton.setOnAction(event -> {
+            playerButton.setDisable(false);
+            startButton.setDisable(true);
+            playerLabel.setText("Your turn");
+        });
 
         playerOne = new Player(SPACE_SIZE, Color.BLACK);
 
@@ -76,20 +72,28 @@ public class Game extends Application {
                 int dieValue = Dice.rollDice();
                 playerLabel.setText("Dice: " + dieValue);
                 playerOne.setPlayerPosition(dieValue);
+                if (playerOne.reachedEnd()) {
+                    playerLabel.setText("You won!");
+                    playerButton.setDisable(true);
+                    playerOne.returnToStart();
+
+                    startLabel.setText("Restart");
+                    startLabel.setTranslateX(273);
+                    startButton.setDisable(false);
+
+                }
             }
         });
 
         root.getChildren().addAll(gameBoard,
-                playerButton,
-                playerLabel,
+                playerButton, startButton,
+                playerLabel, startLabel,
                 playerOne.getPlayerPiece());
 
         return root;
     }
     @Override
     public void start(final Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         Scene scene = new Scene(createContent());
         stage.setTitle("Omnipotent Six");
         stage.setScene(scene);
