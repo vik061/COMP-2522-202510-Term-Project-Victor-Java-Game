@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Game extends Application {
-    public static final int SPACE_SIZE=40, WIDTH=10, HEIGHT=10;
+    public static final int SPACE_SIZE = 40, WIDTH = 10, HEIGHT = 10;
     public static final int BUTTON_LINE = HEIGHT * SPACE_SIZE + 35;
     public static final int DESCRIPTION_LINE = BUTTON_LINE - 20;
     private Player playerOne;
