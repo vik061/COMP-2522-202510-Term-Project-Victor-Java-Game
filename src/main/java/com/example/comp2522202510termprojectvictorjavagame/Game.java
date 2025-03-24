@@ -14,21 +14,41 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Creates the Game's user interface for gameplay.
+ *
+ * @author Victor Lum
+ * @version 2025
+ */
 public class Game extends Application {
-    public static final int SPACE_SIZE = 40, WIDTH = 10, HEIGHT = 10;
-    public static final int BUTTON_LINE = HEIGHT * SPACE_SIZE + 35;
-    public static final int DESCRIPTION_LINE = BUTTON_LINE - 20;
+    /**
+     * Sets the space size.
+     */
+    public static final int SPACE_SIZE = 40;
+    /**
+     * Sets the width size.
+     */
+    public static final int WIDTH = 10;
+    /**
+     * Sets the height size.
+     */
+    public static final int HEIGHT = 10;
+    private static final int BUTTON_LINE = HEIGHT * SPACE_SIZE + 35;
+    private static final int DESCRIPTION_LINE = BUTTON_LINE - 20;
     private Player playerOne;
 
+    /*
+    Creates the user interface for gameplay.
+     */
     private Pane createContent() {
         Pane root = new Pane();
         root.setPrefSize(WIDTH * SPACE_SIZE, HEIGHT * SPACE_SIZE + 100);
 
         for (int index = 0; index < HEIGHT; index++) {
             for (int jIndex = 0; jIndex < WIDTH; jIndex++) {
-                Space space = new Space(SPACE_SIZE, false, false, false);
-                space.SetTranslateX(jIndex * SPACE_SIZE);
-                space.SetTranslateY(index * SPACE_SIZE);
+                Space space = new Space(SPACE_SIZE);
+                space.setTranslateX(jIndex * SPACE_SIZE);
+                space.setTranslateY(index * SPACE_SIZE);
                 root.getChildren().addAll(space);
             }
         }
@@ -39,7 +59,7 @@ public class Game extends Application {
         gameBoard.setFitHeight(HEIGHT * SPACE_SIZE);
         gameBoard.setFitWidth(WIDTH * SPACE_SIZE);
 
-        Button playerButton = new Button("Player One");
+        Button playerButton = new Button("Roll Dice");
         Button startButton = new Button("Start");
 
         playerButton.setDisable(true);
@@ -100,6 +120,10 @@ public class Game extends Application {
         stage.show();
     }
 
+    /**
+     * Launches the game aka Omnipotent Six.
+     * @param args unused
+     */
     public static void main(final String[] args) {
         launch();
     }

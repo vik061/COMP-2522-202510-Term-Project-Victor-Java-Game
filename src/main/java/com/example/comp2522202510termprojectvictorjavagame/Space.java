@@ -1,31 +1,39 @@
 package com.example.comp2522202510termprojectvictorjavagame;
 
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * Creates spaces on board as reference for positioning purposes.
+ *
+ * @author Victor Lum
+ * @version 2025
+ */
 public class Space extends Rectangle {
     private int position;
-    protected boolean isStart;
-    protected boolean isEnd;
-    protected boolean isOmnipotentSix;
 
-    public Space(int position, boolean isStart, boolean isEnd, boolean isOmnipotentSix) {
+    /**
+     * Initializes Space with values to position.
+     * @param position as an int
+     */
+    public Space(final int position) {
         setWidth(position);
         setHeight(position);
         this.position = position;
-        this.isStart = position == 1;
-        this.isEnd = position == 100;
-        this.isOmnipotentSix = position % 6 == 0;
-
-        setFill(Color.AQUAMARINE);
-        setStroke(Color.BLACK);
     }
 
-    public void SetTranslateX(int position) {
-        super.setTranslateX(position);
+    /**
+     * Sets the X coordinate for a position's place on the Board.
+     * @param place as an int
+     */
+    public void setTranslateX(final int place) {
+        super.setTranslateX(place);
     }
 
-    public void SetTranslateY(int position) {
-        super.setTranslateY(position);
+    /**
+     * Sets the Y coordinate for a position's place on the Board.
+     * @param place as an int
+     */
+    public void setTranslateY(final int place) {
+        super.setTranslateY(place);
     }
 }

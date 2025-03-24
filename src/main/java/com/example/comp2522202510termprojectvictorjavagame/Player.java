@@ -24,7 +24,7 @@ public class Player {
     private boolean finishedGame;
 
     /**
-     * Initializes Player with values to playerPiece, position, and finsihedGame.
+     * Initializes Player with values to playerPiece, position, and finishedGame.
      * @param spaceSize as an int
      * @param pieceColor as a Color
      */
