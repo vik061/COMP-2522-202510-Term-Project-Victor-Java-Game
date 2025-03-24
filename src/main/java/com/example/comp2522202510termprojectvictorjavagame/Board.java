@@ -4,13 +4,21 @@ import javafx.util.Pair;
 
 import java.util.ArrayList;
 
+/**
+ * Generates a game board with coordinates and omnipotent spaces.
+ * @author Victor Lum
+ * @version 2025
+ */
 public class Board {
-    private ArrayList<Pair<Integer, Integer>> coordinates;
-    private ArrayList<Integer> omnipotentSpaces;
     private static final int WIN_NUMBER = 100;
     private static final int OMNIPOTENT_NUMBER = 6;
+    private final ArrayList<Pair<Integer, Integer>> coordinates;
+    private ArrayList<Integer> omnipotentSpaces;
 
 
+    /**
+     * Initializes Board with new coordinates and Omnipotent spaces.
+     */
     public Board() {
         coordinates = new ArrayList<>();
         createCoordinates();
@@ -27,13 +35,15 @@ public class Board {
                 } else {
                     xCoord = Game.SPACE_SIZE * Game.HEIGHT - (widthIndex * Game.SPACE_SIZE) - Game.SPACE_SIZE / 2;
                 }
-
                 int yCoord = Game.SPACE_SIZE * Game.HEIGHT - (heightIndex * Game.SPACE_SIZE) - Game.SPACE_SIZE / 2;
                 coordinates.add(new Pair<>(xCoord, yCoord));
             }
         }
     }
 
+    /*
+    Generates omnipotent spaces to omnipotentSpaces ArrayList.
+     */
     private void createOmnipotentSpaces() {
         omnipotentSpaces = new ArrayList<>();
         for (int index = 0; index <= WIN_NUMBER; index++) {
@@ -45,13 +55,23 @@ public class Board {
         }
     }
 
-    public int getNewPosition(int currentPosition) {
-        if (currentPosition > 0 && currentPosition <= 100) {
+    /**
+     * Accesses currentPosition in omnipotentSpaces.
+     * @param currentPosition as an int
+     * @return -1 as an int (to exit this method)
+     */
+    public int getNewPosition(final int currentPosition) {
+        if (currentPosition > 0 && currentPosition <= WIN_NUMBER) {
             return omnipotentSpaces.get(currentPosition);
         }
         return -1;
     }
 
+    /**
+     * Accesses the X coordinate's position in coordinates' key.
+     * @param position as an int
+     * @return -1 as an int (to exit this method)
+     */
     public int getXCoordinate(final int position) {
         if (position >= 1 && position <= WIN_NUMBER) {
             return coordinates.get(position).getKey();
@@ -59,17 +79,15 @@ public class Board {
         return -1;
     }
 
+    /**
+     * Accesses the Y coordinate's position in coordinates' value.
+     * @param position as an int
+     * @return -1 as an int (to exit this method)
+     */
     public int getYCoordinate(final int position) {
         if (position >= 1 && position <= WIN_NUMBER) {
             return coordinates.get(position).getValue();
         }
         return -1;
     }
-//    public static void main(String[] args) {
-//        Board board = new Board();
-//        for (int i = 0; i < board.coordinates.size(); i++) {
-//            System.out.println(i + " x :" + board.coordinates.get(i).getKey() +
-//                    " y :" + board.coordinates.get(i).getValue());
-//        }
-//    }
 }
