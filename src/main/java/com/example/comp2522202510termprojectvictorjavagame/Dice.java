@@ -14,7 +14,7 @@ public final class Dice {
 
     /**
      * Rolls dice randomly.
-     * @return die as an int
+     * @return die's value as an int
      */
     public static int rollDice() {
         final int sides = 6;
