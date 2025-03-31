@@ -53,7 +53,7 @@ public class Game extends Application {
             }
         }
 
-        Image image = new Image("C:\\Users\\vik06\\IdeaProjects\\COMP-2522-202510-Term-Project-Victor-Java-Game\\src\\main\\COMP2522GameBoard.png");
+        Image image = new Image("file:src/main/resources/images/COMP2522GameBoard.png");
         ImageView gameBoard = new ImageView();
         gameBoard.setImage(image);
         gameBoard.setFitHeight(HEIGHT * SPACE_SIZE);
