@@ -1,12 +1,45 @@
 package com.example.comp2522202510termprojectvictorjavagame;
 
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
+//
+//import static org.junit.jupiter.api.Assertions.*;
+//
+//class DiceTest {
+//
+//    @Test
+//    void testRollDice() {
+//
+//    }
+//}
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
-class DiceTest {
+public class DiceTest {
 
     @Test
-    void rollDice() {
+    public void testRollDiceValue() {
+        int result = Dice.rollDice();
+        assertTrue(result >= 1 && result <= 6, "Dice: " + result);
+    }
+
+    @Test
+    public void testRollDiceMultipleTimes() {
+        for (int index = 0; index < 20; index++) {
+            int result = Dice.rollDice();
+            assertTrue(result >= 1 && result <= 6, "Dice: " + result);
+        }
+    }
+
+    @Test
+    public void testRollDiceWithOutOfRangeHighTestValue() {
+        int result = Dice.rollDice();
+        assertFalse(result > 6, "Dice: " + result);
+    }
+
+    @Test
+    public void testRollDiceWithOutOfRangeLowTestValue() {
+        int result = Dice.rollDice();
+        assertFalse(result < 1, "Dice: " + result);
     }
 }
