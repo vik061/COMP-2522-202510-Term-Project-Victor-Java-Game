@@ -4,30 +4,28 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class DiceTest {
+    private final int result = Dice.rollDice();
 
     @Test
     public void testRollDiceValue() {
-        int result = Dice.rollDice();
         assertTrue(result >= 1 && result <= 6, "Dice: " + result);
     }
 
     @Test
     public void testRollDiceMultipleTimes() {
         for (int index = 0; index < 20; index++) {
-            int result = Dice.rollDice();
-            assertTrue(result >= 1 && result <= 6, "Dice: " + result);
+            int eachResult = Dice.rollDice();
+            assertTrue(eachResult >= 1 && eachResult <= 6, "Dice: " + eachResult);
         }
     }
 
     @Test
     public void testRollDiceWithOutOfRangeHighTestValue() {
-        int result = Dice.rollDice();
         assertFalse(result > 6, "Dice: " + result);
     }
 
     @Test
     public void testRollDiceWithOutOfRangeLowTestValue() {
-        int result = Dice.rollDice();
         assertFalse(result < 1, "Dice: " + result);
     }
 }
