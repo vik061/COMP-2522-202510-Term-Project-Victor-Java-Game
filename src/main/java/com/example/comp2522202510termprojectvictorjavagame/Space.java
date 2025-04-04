@@ -36,4 +36,13 @@ public class Space extends Rectangle {
     public void setTranslateY(final int place) {
         super.setTranslateY(place);
     }
+
+    /**
+     * Accesses the position value in Space.
+     * @return position as an int
+     */
+    public int getPosition() {
+        return position;
+    }
 }
+
