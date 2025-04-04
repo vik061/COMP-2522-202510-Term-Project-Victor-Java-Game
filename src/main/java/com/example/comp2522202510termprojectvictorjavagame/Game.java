@@ -60,6 +60,9 @@ public class Game extends Application {
         }
     }
 
+    /*
+    Creates visual display of the game board.
+     */
     private ImageView createGameBoard() {
         Image image = new Image("file:src/main/resources/images/COMP2522GameBoard.png");
         ImageView gameBoard = new ImageView();
@@ -67,6 +70,33 @@ public class Game extends Application {
         gameBoard.setFitHeight(HEIGHT * SPACE_SIZE);
         gameBoard.setFitWidth(WIDTH * SPACE_SIZE);
         return gameBoard;
+    }
+
+    /*
+    Creates the player button.
+     */
+    private Button createPlayerButton() {
+        Button playerButton = new Button("Roll Dice");
+        playerButton.setDisable(true);
+        playerButton.setTranslateY(BUTTON_LINE);
+        playerButton.setTranslateX(77);
+        return playerButton;
+    }
+
+    /*
+    Creates the start button
+     */
+    private Button createStartButton(final Button playerButton) {
+        Button startButton = new Button("Start");
+        startButton.setDisable(false);
+        startButton.setTranslateY(BUTTON_LINE);
+        startButton.setTranslateX(270);
+        startButton.setOnAction(event -> {
+            playerButton.setDisable(false);
+            startButton.setDisable(true);
+        });
+        return startButton;
+
     }
 
     /*
@@ -78,30 +108,13 @@ public class Game extends Application {
 
         ImageView gameBoard = createGameBoard();
 
-        Button playerButton = new Button("Roll Dice");
-        Button startButton = new Button("Start");
-
-        playerButton.setDisable(true);
-        startButton.setDisable(false);
-
-        playerButton.setTranslateY(BUTTON_LINE);
-        playerButton.setTranslateX(77);
-        startButton.setTranslateY(BUTTON_LINE);
-        startButton.setTranslateX(270);
+        Button playerButton = createPlayerButton();
+        Button startButton = createStartButton(playerButton);
 
         Label playerLabel = new Label();
         Label startLabel = new Label("Start");
 
-        playerLabel.setTranslateY(DESCRIPTION_LINE);
-        playerLabel.setTranslateX(90);
-        startLabel.setTranslateY(DESCRIPTION_LINE);
-        startLabel.setTranslateX(277);
 
-        startButton.setOnAction(event -> {
-            playerButton.setDisable(false);
-            startButton.setDisable(true);
-            playerLabel.setText("Your turn");
-        });
 
         playerOne = new Player(SPACE_SIZE, Color.BLACK);
 
