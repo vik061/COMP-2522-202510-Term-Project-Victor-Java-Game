@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class OmnipotentSpaceTest {
+    private final int expectedOmnipotentPosition = 66;
 
     @Test
     public void testConstructor() {
-        int expectedOmnipotentPosition = 50;
-        int expectedPosition = 10;
+        final int expectedPosition = 10;
         OmnipotentSpace space = new OmnipotentSpace(expectedOmnipotentPosition, expectedPosition);
 
         assertEquals(expectedOmnipotentPosition, space.getOmnipotentPosition());
@@ -17,9 +17,8 @@ public class OmnipotentSpaceTest {
 
     @Test
     public void testDetermineNewPositionInRange() {
-        int omnipotentPosition = 6;
-        int newPosition = OmnipotentSpace.determineNewPosition(omnipotentPosition);
-        assertTrue(newPosition >= omnipotentPosition - 5 && newPosition <= omnipotentPosition + 5);
+        int newPosition = OmnipotentSpace.determineNewPosition(expectedOmnipotentPosition);
+        assertTrue(newPosition >= expectedOmnipotentPosition - 5 && newPosition <= expectedOmnipotentPosition + 5);
     }
 
     @Test
