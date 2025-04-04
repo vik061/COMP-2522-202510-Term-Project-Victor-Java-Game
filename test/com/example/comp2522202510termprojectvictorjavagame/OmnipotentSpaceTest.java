@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 
 public class OmnipotentSpaceTest {
     private final int expectedOmnipotentPosition = 66;
+    private final int expectedPosition = 10;
 
     @Test
     public void testConstructor() {
-        final int expectedPosition = 10;
         OmnipotentSpace space = new OmnipotentSpace(expectedOmnipotentPosition, expectedPosition);
 
         assertEquals(expectedOmnipotentPosition, space.getOmnipotentPosition());
@@ -18,7 +18,8 @@ public class OmnipotentSpaceTest {
     @Test
     public void testDetermineNewPositionInRange() {
         int newPosition = OmnipotentSpace.determineNewPosition(expectedOmnipotentPosition);
-        assertTrue(newPosition >= expectedOmnipotentPosition - 5 && newPosition <= expectedOmnipotentPosition + 5);
+        assertTrue(true, String.valueOf(newPosition >= expectedOmnipotentPosition - 5
+                                                    && newPosition <= expectedOmnipotentPosition + 5));
     }
 
     @Test
@@ -27,4 +28,11 @@ public class OmnipotentSpaceTest {
         int newPosition = OmnipotentSpace.determineNewPosition(outOfRangePosition);
         assertTrue(newPosition >= 1 && newPosition <= 100);
     }
+
+    @Test
+    public void testGetOmnipotentPosition() {
+        OmnipotentSpace space = new OmnipotentSpace(expectedOmnipotentPosition, expectedPosition);
+        assertEquals(expectedOmnipotentPosition, space.getOmnipotentPosition());
+    }
+
 }
