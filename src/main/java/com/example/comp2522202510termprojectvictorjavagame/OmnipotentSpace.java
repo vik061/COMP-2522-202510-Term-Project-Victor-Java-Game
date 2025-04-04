@@ -37,4 +37,13 @@ public class OmnipotentSpace extends Space {
             return omnipotentForce;
         }
     }
+
+    /**
+     * Accesses the omnipotentPosition value in OmnipotentSpace.
+     * @return omnipotentPosition as an int
+     */
+    public int getOmnipotentPosition() {
+        return omnipotentPosition;
+    }
+
 }
