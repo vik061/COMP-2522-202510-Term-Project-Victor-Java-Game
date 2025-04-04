@@ -33,9 +33,12 @@ public class Board {
                 if (heightIndex % 2 == 0) {
                     xCoord = widthIndex * Game.SPACE_SIZE + Game.SPACE_SIZE / 2;
                 } else {
-                    xCoord = Game.SPACE_SIZE * Game.HEIGHT - (widthIndex * Game.SPACE_SIZE) - Game.SPACE_SIZE / 2;
+                    xCoord = Game.SPACE_SIZE * Game.HEIGHT - (widthIndex * Game.SPACE_SIZE)
+                            - Game.SPACE_SIZE / 2;
+
                 }
-                int yCoord = Game.SPACE_SIZE * Game.HEIGHT - (heightIndex * Game.SPACE_SIZE) - Game.SPACE_SIZE / 2;
+                int yCoord = Game.SPACE_SIZE * Game.HEIGHT - (heightIndex * Game.SPACE_SIZE)
+                        - Game.SPACE_SIZE / 2;
                 coordinates.add(new Pair<>(xCoord, yCoord));
             }
         }
@@ -58,7 +61,7 @@ public class Board {
     /**
      * Accesses currentPosition in omnipotentSpaces.
      * @param currentPosition as an int
-     * @return -1 as an int (to exit this method)
+     * @return new position or -1 as an int
      */
     public int getNewPosition(final int currentPosition) {
         if (currentPosition > 0 && currentPosition <= WIN_NUMBER) {
@@ -70,7 +73,7 @@ public class Board {
     /**
      * Accesses the X coordinate's position in coordinates' key.
      * @param position as an int
-     * @return -1 as an int (to exit this method)
+     * @return x-coordinate or -1 as an int
      */
     public int getXCoordinate(final int position) {
         if (position >= 1 && position <= WIN_NUMBER) {
@@ -82,7 +85,7 @@ public class Board {
     /**
      * Accesses the Y coordinate's position in coordinates' value.
      * @param position as an int
-     * @return -1 as an int (to exit this method)
+     * @return y-coordinate or -1 as an int
      */
     public int getYCoordinate(final int position) {
         if (position >= 1 && position <= WIN_NUMBER) {
