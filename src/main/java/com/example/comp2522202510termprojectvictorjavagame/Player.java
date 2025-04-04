@@ -67,8 +67,9 @@ public class Player {
     /*
     Implements animation for player's piece to move across the board.
      */
-    private TranslateTransition moveAnimation(final int dieValue) {
-        TranslateTransition move = new TranslateTransition(Duration.millis(DICE_ANIMATION_DURATION * dieValue), playerPiece);
+    TranslateTransition moveAnimation(final int dieValue) {
+        TranslateTransition move = new TranslateTransition(Duration.millis(DICE_ANIMATION_DURATION * dieValue),
+                                                                                playerPiece);
         move.setToX(GAME_BOARD.getXCoordinate(position));
         move.setToY(GAME_BOARD.getYCoordinate(position));
         move.setAutoReverse(false);
@@ -92,11 +93,36 @@ public class Player {
     }
 
     /**
-     * Accesses the playerPiece in Player.
-     * @return playerPiece as a Circle
+     * Accesses the position in Player.
+     * @return position as a Circle
      */
     public Circle getPlayerPiece() {
         return playerPiece;
+    }
+
+    /**
+     * Accesses the position in Player.
+     * @return position as an int
+     */
+    public int getPosition() {
+        return position;
+    }
+
+    /**
+     * Accesses the finishedGame status in Player.
+     *
+     * @return finishedGame as a boolean
+     */
+    public boolean getFinishedGame() {
+        return finishedGame;
+    }
+
+    /**
+     * Modifies the position value in Player.
+     * @param newPosition as an int
+     */
+    public void setPosition(final int newPosition) {
+        this.position = newPosition;
     }
 
 }
