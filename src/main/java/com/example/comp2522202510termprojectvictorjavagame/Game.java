@@ -38,12 +38,18 @@ public class Game extends Application {
     private Player playerOne;
 
     /*
-    Creates the user interface for gameplay.
+    Creates a root pane for the game board.
      */
-    private Pane createContent() {
+    private Pane createRootPane() {
         Pane root = new Pane();
         root.setPrefSize(WIDTH * SPACE_SIZE, HEIGHT * SPACE_SIZE + 100);
+        return root;
+    }
 
+    /*
+    Adds space's X and Y coordinates to the root pane.
+     */
+    private void addSpaces(final Pane root) {
         for (int index = 0; index < HEIGHT; index++) {
             for (int jIndex = 0; jIndex < WIDTH; jIndex++) {
                 Space space = new Space(SPACE_SIZE);
@@ -52,12 +58,25 @@ public class Game extends Application {
                 root.getChildren().addAll(space);
             }
         }
+    }
 
+    private ImageView createGameBoard() {
         Image image = new Image("file:src/main/resources/images/COMP2522GameBoard.png");
         ImageView gameBoard = new ImageView();
         gameBoard.setImage(image);
         gameBoard.setFitHeight(HEIGHT * SPACE_SIZE);
         gameBoard.setFitWidth(WIDTH * SPACE_SIZE);
+        return gameBoard;
+    }
+
+    /*
+    Creates the user interface for gameplay.
+     */
+    private Pane createContent() {
+        Pane root = createRootPane();
+        addSpaces(root);
+
+        ImageView gameBoard = createGameBoard();
 
         Button playerButton = new Button("Roll Dice");
         Button startButton = new Button("Start");
