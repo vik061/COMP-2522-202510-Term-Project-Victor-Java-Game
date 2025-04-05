@@ -1,8 +1,6 @@
 package com.example.comp2522202510termprojectvictorjavagame;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.Scene;
@@ -33,8 +31,14 @@ public class Game extends Application {
      * Sets the height size.
      */
     public static final int HEIGHT = 10;
+    private static final int BOTTOM_SPACE = 100;
     private static final int BUTTON_LINE = HEIGHT * SPACE_SIZE + 35;
     private static final int DESCRIPTION_LINE = BUTTON_LINE - 20;
+    private static final int PLAYER_BUTTON_X_COORD = 77;
+    private static final int START_BUTTON_X_COORD = 270;
+    private static final int PLAYER_LABEL_X_COORD = 90;
+    private static final int START_LABEL_X_COORD = 277;
+    private static final int RESTART_LABEL_X_COORD = 273;
     private Player playerOne;
 
     /*
@@ -42,7 +46,7 @@ public class Game extends Application {
      */
     private Pane createRootPane() {
         Pane root = new Pane();
-        root.setPrefSize(WIDTH * SPACE_SIZE, HEIGHT * SPACE_SIZE + 100);
+        root.setPrefSize(WIDTH * SPACE_SIZE, HEIGHT * SPACE_SIZE + BOTTOM_SPACE);
         return root;
     }
 
@@ -79,7 +83,7 @@ public class Game extends Application {
         Button playerButton = new Button("Roll Dice");
         playerButton.setDisable(true);
         playerButton.setTranslateY(BUTTON_LINE);
-        playerButton.setTranslateX(77);
+        playerButton.setTranslateX(PLAYER_BUTTON_X_COORD);
         return playerButton;
     }
 
@@ -90,13 +94,61 @@ public class Game extends Application {
         Button startButton = new Button("Start");
         startButton.setDisable(false);
         startButton.setTranslateY(BUTTON_LINE);
-        startButton.setTranslateX(270);
+        startButton.setTranslateX(START_BUTTON_X_COORD);
+
         startButton.setOnAction(event -> {
             playerButton.setDisable(false);
             startButton.setDisable(true);
         });
         return startButton;
+    }
 
+    /*
+    Creates the player label.
+     */
+    private Label createPlayerLabel() {
+        Label playerLabel = new Label();
+        playerLabel.setTranslateY(DESCRIPTION_LINE);
+        playerLabel.setTranslateX(PLAYER_LABEL_X_COORD);
+        return playerLabel;
+    }
+
+    /*
+    Creates the start label.
+     */
+    private Label createStartLabel() {
+        Label startLabel = new Label("Start");
+        startLabel.setTranslateY(DESCRIPTION_LINE);
+        startLabel.setTranslateX(START_LABEL_X_COORD);
+        return startLabel;
+    }
+
+    /*
+    Sets the start and player button's event handlers in the game.
+     */
+    private void setEventHandlers(final Button playerButton, final Button startButton,
+                                  final Label playerLabel, final Label startLabel) {
+        startButton.setOnAction(event -> {
+            playerButton.setDisable(false);
+            startButton.setDisable(true);
+            playerLabel.setText("Your turn");
+        });
+
+        playerButton.setOnAction(event -> {
+                int dieValue = Dice.rollDice();
+                playerLabel.setText("Dice: " + dieValue);
+                playerOne.setPlayerPosition(dieValue);
+                if (playerOne.reachedEnd()) {
+                    playerLabel.setText("You won!");
+                    playerButton.setDisable(true);
+                    playerOne.returnToStart();
+
+                    startLabel.setText("Restart");
+                    startLabel.setTranslateX(RESTART_LABEL_X_COORD);
+                    startButton.setDisable(false);
+
+                }
+            });
     }
 
     /*
@@ -110,32 +162,12 @@ public class Game extends Application {
 
         Button playerButton = createPlayerButton();
         Button startButton = createStartButton(playerButton);
-
-        Label playerLabel = new Label();
-        Label startLabel = new Label("Start");
-
-
+        Label playerLabel = createPlayerLabel();
+        Label startLabel = createStartLabel();
 
         playerOne = new Player(SPACE_SIZE, Color.BLACK);
 
-        playerButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(final ActionEvent actionEvent) {
-                int dieValue = Dice.rollDice();
-                playerLabel.setText("Dice: " + dieValue);
-                playerOne.setPlayerPosition(dieValue);
-                if (playerOne.reachedEnd()) {
-                    playerLabel.setText("You won!");
-                    playerButton.setDisable(true);
-                    playerOne.returnToStart();
-
-                    startLabel.setText("Restart");
-                    startLabel.setTranslateX(273);
-                    startButton.setDisable(false);
-
-                }
-            }
-        });
+        setEventHandlers(playerButton, startButton, playerLabel, startLabel);
 
         root.getChildren().addAll(gameBoard,
                 playerButton, startButton,
@@ -144,6 +176,7 @@ public class Game extends Application {
 
         return root;
     }
+
     @Override
     public void start(final Stage stage) throws IOException {
         Scene scene = new Scene(createContent());
