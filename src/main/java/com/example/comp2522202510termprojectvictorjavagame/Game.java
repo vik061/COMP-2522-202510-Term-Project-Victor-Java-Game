@@ -10,6 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -30,6 +32,7 @@ public class Game extends Application {
     private static final int PLAYER_LABEL_X_COORD = 90;
     private static final int START_LABEL_X_COORD = 277;
     private static final int RESTART_LABEL_X_COORD = 273;
+    private static final String SAVE_FILE_PATH = "src/main/resources/player_position.txt";
     private Player playerOne;
 
     /**
@@ -59,7 +62,7 @@ public class Game extends Application {
     /*
     Creates a root pane for the game board.
      */
-    private Pane createRootPane() {
+    Pane createRootPane() {
         Pane root = new Pane();
         root.setPrefSize(WIDTH * SPACE_SIZE, HEIGHT * SPACE_SIZE + BOTTOM_SPACE);
         return root;
@@ -198,6 +201,18 @@ public class Game extends Application {
         stage.setTitle("Omnipotent Six");
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(event -> savePlayerPosition());
+    }
+
+    /*
+    Saves the player's most recent position in a txt file.
+     */
+    private void savePlayerPosition() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_FILE_PATH))) {
+            writer.write(String.valueOf(playerOne.getPosition()));
+        } catch (IOException error) {
+            System.err.println("Error saving player position: " + error.getMessage());
+        }
     }
 
     /**
