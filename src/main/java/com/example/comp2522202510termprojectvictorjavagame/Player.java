@@ -7,6 +7,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * Generates a player with playerPiece, position, and finishedGame.
  *
@@ -19,6 +23,7 @@ public class Player {
     private static final int SEQUENCE_DURATION = 800;
     private static final int DICE_ANIMATION_DURATION = 200;
     private static final int DIE_VALUE = 6;
+    private static final String SAVE_FILE_PATH = "src/main/resources/player_position.txt";
     private final Circle playerPiece;
     private int position;
     private boolean finishedGame;
@@ -32,7 +37,7 @@ public class Player {
         playerPiece = new Circle(spaceSize / 2);
         playerPiece.setFill(pieceColor);
         position = 0;
-        setPlayerPosition(1);
+        setPlayerPosition(loadPlayerPosition());
         finishedGame = (position == WIN_NUMBER);
     }
 
@@ -123,6 +128,19 @@ public class Player {
      */
     public void setPosition(final int newPosition) {
         this.position = newPosition;
+    }
+
+    /*
+    Loads the player's most recent position from a txt file.
+     */
+    private int loadPlayerPosition() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(SAVE_FILE_PATH))) {
+            String line = reader.readLine();
+            return Integer.parseInt(line);
+        } catch (IOException | NumberFormatException error) {
+            System.err.println("Error loading player position, defaulting to start: " + error.getMessage());
+            return 0;
+        }
     }
 
 }
