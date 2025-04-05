@@ -27,18 +27,18 @@ public class Board {
 
     private void createCoordinates() {
         coordinates.add(new Pair<>(0, 0));
-        for (int heightIndex = 0; heightIndex < Game.HEIGHT; heightIndex++) {
-            for (int widthIndex = 0; widthIndex < Game.WIDTH; widthIndex++) {
+        for (int heightIndex = 0; heightIndex < Game.getHeight(); heightIndex++) {
+            for (int widthIndex = 0; widthIndex < Game.getWidth(); widthIndex++) {
                 int xCoord;
                 if (heightIndex % 2 == 0) {
-                    xCoord = widthIndex * Game.SPACE_SIZE + Game.SPACE_SIZE / 2;
+                    xCoord = widthIndex * Game.getSpaceSize() + Game.getSpaceSize() / 2;
                 } else {
-                    xCoord = Game.SPACE_SIZE * Game.HEIGHT - (widthIndex * Game.SPACE_SIZE)
-                            - Game.SPACE_SIZE / 2;
+                    xCoord = Game.getSpaceSize() * Game.getHeight() - (widthIndex * Game.getSpaceSize())
+                            - Game.getSpaceSize() / 2;
 
                 }
-                int yCoord = Game.SPACE_SIZE * Game.HEIGHT - (heightIndex * Game.SPACE_SIZE)
-                        - Game.SPACE_SIZE / 2;
+                int yCoord = Game.getSpaceSize() * Game.getHeight() - (heightIndex * Game.getSpaceSize())
+                        - Game.getSpaceSize() / 2;
                 coordinates.add(new Pair<>(xCoord, yCoord));
             }
         }
