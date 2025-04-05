@@ -19,18 +19,9 @@ import java.io.IOException;
  * @version 2025
  */
 public class Game extends Application {
-    /**
-     * Sets the space size.
-     */
-    public static final int SPACE_SIZE = 40;
-    /**
-     * Sets the width size.
-     */
-    public static final int WIDTH = 10;
-    /**
-     * Sets the height size.
-     */
-    public static final int HEIGHT = 10;
+    private static final int SPACE_SIZE = 40;
+    private static final int WIDTH = 10;
+    private static final int HEIGHT = 10;
     private static final int BOTTOM_SPACE = 100;
     private static final int BUTTON_LINE = HEIGHT * SPACE_SIZE + 35;
     private static final int DESCRIPTION_LINE = BUTTON_LINE - 20;
@@ -40,6 +31,30 @@ public class Game extends Application {
     private static final int START_LABEL_X_COORD = 277;
     private static final int RESTART_LABEL_X_COORD = 273;
     private Player playerOne;
+
+    /**
+     * Accesses the SPACE_SIZE value in Game.
+     * @return SPACE_SIZE as an int
+     */
+    public static int getSpaceSize() {
+        return SPACE_SIZE;
+    }
+
+    /**
+     * Accesses the WIDTH value in Game.
+     * @return WIDTH as an int
+     */
+    public static int getWidth() {
+        return WIDTH;
+    }
+
+    /**
+     * Accesses the HEIGHT value in Game.
+     * @return HEIGHT as an int
+     */
+    public static int getHeight() {
+        return HEIGHT;
+    }
 
     /*
     Creates a root pane for the game board.
