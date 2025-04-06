@@ -10,6 +10,7 @@ import javafx.util.Duration;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Generates a player with playerPiece, position, and finishedGame.
@@ -143,4 +144,34 @@ public class Player {
         }
     }
 
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Player player = (Player) object;
+        return position == player.position && finishedGame == player.finishedGame
+                && Objects.equals(playerPiece, player.playerPiece);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerPiece, position, finishedGame);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sbuilder = new StringBuilder("Player{");
+        sbuilder.append("playerPiece=");
+        sbuilder.append(playerPiece);
+        sbuilder.append(", position=");
+        sbuilder.append(position);
+        sbuilder.append(", finishedGame=");
+        sbuilder.append(finishedGame);
+        sbuilder.append('}');
+        return sbuilder.toString();
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.comp2522202510termprojectvictorjavagame;
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -46,4 +47,32 @@ public class OmnipotentSpace extends Space {
         return omnipotentPosition;
     }
 
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!super.equals(object)) {
+            return false;
+        }
+        if (getClass() != object.getClass()) {
+            return false;
+        }
+        OmnipotentSpace omnipotentSpace = (OmnipotentSpace) object;
+        return omnipotentPosition == omnipotentSpace.omnipotentPosition;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), omnipotentPosition);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sbuilder = new StringBuilder("OmnipotentSpace{");
+        sbuilder.append("omnipotentPosition=");
+        sbuilder.append(omnipotentPosition);
+        sbuilder.append('}');
+        return sbuilder.toString();
+    }
 }

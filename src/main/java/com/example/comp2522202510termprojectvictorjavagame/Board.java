@@ -3,6 +3,7 @@ package com.example.comp2522202510termprojectvictorjavagame;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Generates a game board with coordinates and omnipotent spaces.
@@ -93,4 +94,28 @@ public class Board {
         }
         return -1;
     }
+
+    @Override
+    public boolean equals(final Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        Board board = (Board) object;
+        return Objects.equals(coordinates, board.coordinates) && Objects.equals(omnipotentSpaces, board.omnipotentSpaces);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(coordinates, omnipotentSpaces);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sbuilder = new StringBuilder("Board{");
+        sbuilder.append("coordinates=");
+        sbuilder.append(coordinates);
+        sbuilder.append(", omnipotentSpaces=");
+        sbuilder.append(omnipotentSpaces);
+        sbuilder.append("}");
+        return sbuilder.toString();
+    }
 }
+

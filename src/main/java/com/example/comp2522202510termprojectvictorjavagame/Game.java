@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Creates the Game's user interface for gameplay.
@@ -34,6 +35,8 @@ public class Game extends Application {
     private static final int RESTART_LABEL_X_COORD = 273;
     private static final String SAVE_FILE_PATH = "src/main/resources/player_position.txt";
     private Player playerOne;
+
+    Image image = new Image(getClass().getResource("/images/COMP2522GameBoard.png").toExternalForm());
 
     /**
      * Accesses the SPACE_SIZE value in Game.
@@ -59,21 +62,19 @@ public class Game extends Application {
         return HEIGHT;
     }
 
-    /**
-     * Creates a root pane for the game board.
-     * @return root as a Pane
+    /*
+    Creates a root pane for the game board.
      */
-    public Pane createRootPane() {
+    private Pane createRootPane() {
         Pane root = new Pane();
         root.setPrefSize(WIDTH * SPACE_SIZE, HEIGHT * SPACE_SIZE + BOTTOM_SPACE);
         return root;
     }
 
-    /**
-     * Adds space's X and Y coordinates to the root pane.
-     * @param root as a Pane
+    /*
+    Adds space's X and Y coordinates to the root pane.
      */
-    public void addSpaces(final Pane root) {
+    private void addSpaces(final Pane root) {
         for (int index = 0; index < HEIGHT; index++) {
             for (int jIndex = 0; jIndex < WIDTH; jIndex++) {
                 Space space = new Space(SPACE_SIZE);
@@ -96,11 +97,10 @@ public class Game extends Application {
         return gameBoard;
     }
 
-    /**
-     * Creates the player button.
-     * @return playerButton as a Button
+    /*
+    Creates the player button.
      */
-    public Button createPlayerButton() {
+    private Button createPlayerButton() {
         Button playerButton = new Button("Roll Dice");
         playerButton.setDisable(true);
         playerButton.setTranslateY(BUTTON_LINE);
@@ -108,11 +108,10 @@ public class Game extends Application {
         return playerButton;
     }
 
-    /**
-     * Creates the start button.
-     * @return startButton as a Button
+    /*
+    Creates the start button
      */
-    public Button createStartButton(final Button playerButton) {
+    private Button createStartButton(final Button playerButton) {
         Button startButton = new Button("Start");
         startButton.setDisable(false);
         startButton.setTranslateY(BUTTON_LINE);
@@ -125,37 +124,31 @@ public class Game extends Application {
         return startButton;
     }
 
-    /**
-     * Creates the player label.
-     * @return playerLabel as a Label
+    /*
+    Creates the player label.
      */
-    Label createPlayerLabel() {
+    private Label createPlayerLabel() {
         Label playerLabel = new Label();
         playerLabel.setTranslateY(DESCRIPTION_LINE);
         playerLabel.setTranslateX(PLAYER_LABEL_X_COORD);
         return playerLabel;
     }
 
-    /**
-     * Creates the start label.
-     * @return startLabel as a Label
+    /*
+    Creates the start label.
      */
-    Label createStartLabel() {
+    private Label createStartLabel() {
         Label startLabel = new Label("Start");
         startLabel.setTranslateY(DESCRIPTION_LINE);
         startLabel.setTranslateX(START_LABEL_X_COORD);
         return startLabel;
     }
 
-    /**
-     * Sets the start and player button's event handlers in the game.
-     * @param playerButton as a Button
-     * @param startButton as a Button
-     * @param playerLabel as a Label
-     * @param startLabel as a Label
+    /*
+    Sets the start and player button's event handlers in the game.
      */
-    public void setEventHandlers(final Button playerButton, final Button startButton,
-                          final Label playerLabel, final Label startLabel) {
+    private void setEventHandlers(final Button playerButton, final Button startButton,
+                                  final Label playerLabel, final Label startLabel) {
         startButton.setOnAction(event -> {
             playerButton.setDisable(false);
             startButton.setDisable(true);
@@ -163,27 +156,26 @@ public class Game extends Application {
         });
 
         playerButton.setOnAction(event -> {
-                int dieValue = Dice.rollDice();
-                playerLabel.setText("Dice: " + dieValue);
-                playerOne.setPlayerPosition(dieValue);
-                if (playerOne.reachedEnd()) {
-                    playerLabel.setText("You won!");
-                    playerButton.setDisable(true);
-                    playerOne.returnToStart();
+            int dieValue = Dice.rollDice();
+            playerLabel.setText("Dice: " + dieValue);
+            playerOne.setPlayerPosition(dieValue);
+            if (playerOne.reachedEnd()) {
+                playerLabel.setText("You won!");
+                playerButton.setDisable(true);
+                playerOne.returnToStart();
 
-                    startLabel.setText("Restart");
-                    startLabel.setTranslateX(RESTART_LABEL_X_COORD);
-                    startButton.setDisable(false);
+                startLabel.setText("Restart");
+                startLabel.setTranslateX(RESTART_LABEL_X_COORD);
+                startButton.setDisable(false);
 
-                }
-            });
+            }
+        });
     }
 
-    /**
-     * Creates the user interface for gameplay.
-     * @return root as a Pane
+    /*
+    Creates the user interface for gameplay.
      */
-    public Pane createContent() {
+    private Pane createContent() {
         Pane root = createRootPane();
         addSpaces(root);
 
@@ -206,12 +198,8 @@ public class Game extends Application {
         return root;
     }
 
-    /**
-     * Begins the setup for the gameplay.
-     * @param stage as a Stage
-     */
     @Override
-    public void start(final Stage stage) {
+    public void start(final Stage stage) throws IOException {
         Scene scene = new Scene(createContent());
         stage.setTitle("Omnipotent Six");
         stage.setScene(scene);
@@ -236,5 +224,28 @@ public class Game extends Application {
      */
     public static void main(final String[] args) {
         launch();
+    }
+
+    @Override
+    public boolean equals(final Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        Game game = (Game) object;
+        return Objects.equals(playerOne, game.playerOne) && Objects.equals(image, game.image);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerOne, image);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Game{");
+        sb.append("playerOne=");
+        sb.append(playerOne);
+        sb.append(", image=");
+        sb.append(image);
+        sb.append('}');
+        return sb.toString();
     }
 }
