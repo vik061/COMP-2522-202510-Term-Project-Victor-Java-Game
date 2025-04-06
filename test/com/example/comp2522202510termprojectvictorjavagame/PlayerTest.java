@@ -11,7 +11,7 @@ import javafx.application.Platform;
 import org.junit.jupiter.api.BeforeAll;
 
 class PlayerTest {
-    private static final int DICE_ANIMATION_DURATION = 200;
+    private static final int DICE_ANIMATION_DURATION = 100;
     Player player = new Player(20, Color.RED);
 
     @BeforeAll
@@ -28,7 +28,6 @@ class PlayerTest {
 
     @Test
     void testSetPlayerPositionValidMove() {
-        // Verify that position is updated correctly within bounds
         player.setPlayerPosition(2);
         assertEquals(3, player.getPosition());
     }

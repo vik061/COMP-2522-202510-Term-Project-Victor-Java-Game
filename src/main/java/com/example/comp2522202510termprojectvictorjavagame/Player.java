@@ -20,8 +20,8 @@ import java.io.IOException;
 public class Player {
     private static final Board GAME_BOARD = new Board();
     private static final int WIN_NUMBER = 100;
-    private static final int SEQUENCE_DURATION = 800;
-    private static final int DICE_ANIMATION_DURATION = 200;
+    private static final int SEQUENCE_DURATION = 200;
+    private static final int DICE_ANIMATION_DURATION = 100;
     private static final int DIE_VALUE = 6;
     private static final String SAVE_FILE_PATH = "src/main/resources/player_position.txt";
     private final Circle playerPiece;
@@ -85,7 +85,7 @@ public class Player {
      * Brings the player back to the start of the board.
      */
     public void returnToStart() {
-        position = 0;
+        setPosition(0);
         setPlayerPosition(1);
     }
 
