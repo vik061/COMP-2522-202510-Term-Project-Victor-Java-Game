@@ -44,5 +44,14 @@ public class Space extends Rectangle {
     public int getPosition() {
         return position;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sbuilder = new StringBuilder("Space{");
+        sbuilder.append("position=");
+        sbuilder.append(position);
+        sbuilder.append('}');
+        return sbuilder.toString();
+    }
 }
 

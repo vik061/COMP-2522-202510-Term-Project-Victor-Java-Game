@@ -21,4 +21,11 @@ public final class Dice {
         Random random = new Random();
         return random.nextInt(sides) + 1;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sbuilder = new StringBuilder("Dice{");
+        sbuilder.append('}');
+        return sbuilder.toString();
+    }
 }
