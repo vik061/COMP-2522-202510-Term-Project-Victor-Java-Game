@@ -36,8 +36,6 @@ public class Game extends Application {
     private static final String SAVE_FILE_PATH = "src/main/resources/player_position.txt";
     private Player playerOne;
 
-    Image image = new Image(getClass().getResource("/images/COMP2522GameBoard.png").toExternalForm());
-
     /**
      * Accesses the SPACE_SIZE value in Game.
      * @return SPACE_SIZE as an int
@@ -198,8 +196,12 @@ public class Game extends Application {
         return root;
     }
 
+    /**
+     * Initializes the game's functionalities.
+     * @param stage as a Stage
+     */
     @Override
-    public void start(final Stage stage) throws IOException {
+    public void start(final Stage stage) {
         Scene scene = new Scene(createContent());
         stage.setTitle("Omnipotent Six");
         stage.setScene(scene);
@@ -228,24 +230,24 @@ public class Game extends Application {
 
     @Override
     public boolean equals(final Object object) {
-        if (object == null || getClass() != object.getClass()) return false;
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
         Game game = (Game) object;
-        return Objects.equals(playerOne, game.playerOne) && Objects.equals(image, game.image);
+        return Objects.equals(playerOne, game.playerOne);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(playerOne, image);
+        return Objects.hash(playerOne);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Game{");
-        sb.append("playerOne=");
-        sb.append(playerOne);
-        sb.append(", image=");
-        sb.append(image);
-        sb.append('}');
-        return sb.toString();
+        final StringBuilder sbuilder = new StringBuilder("Game{");
+        sbuilder.append("playerOne=");
+        sbuilder.append(playerOne);
+        sbuilder.append('}');
+        return sbuilder.toString();
     }
 }
