@@ -29,7 +29,7 @@ public class Game extends Application {
     private static final int DESCRIPTION_LINE = BUTTON_LINE - 20;
     private static final int PLAYER_BUTTON_X_COORD = 77;
     private static final int START_BUTTON_X_COORD = 270;
-    private static final int PLAYER_LABEL_X_COORD = 90;
+    private static final int PLAYER_LABEL_X_COORD = 84;
     private static final int START_LABEL_X_COORD = 277;
     private static final int RESTART_LABEL_X_COORD = 273;
     private static final String SAVE_FILE_PATH = "src/main/resources/player_position.txt";
@@ -59,19 +59,21 @@ public class Game extends Application {
         return HEIGHT;
     }
 
-    /*
-    Creates a root pane for the game board.
+    /**
+     * Creates a root pane for the game board.
+     * @return root as a Pane
      */
-    Pane createRootPane() {
+    public Pane createRootPane() {
         Pane root = new Pane();
         root.setPrefSize(WIDTH * SPACE_SIZE, HEIGHT * SPACE_SIZE + BOTTOM_SPACE);
         return root;
     }
 
-    /*
-    Adds space's X and Y coordinates to the root pane.
+    /**
+     * Adds space's X and Y coordinates to the root pane.
+     * @param root as a Pane
      */
-    private void addSpaces(final Pane root) {
+    public void addSpaces(final Pane root) {
         for (int index = 0; index < HEIGHT; index++) {
             for (int jIndex = 0; jIndex < WIDTH; jIndex++) {
                 Space space = new Space(SPACE_SIZE);
@@ -94,10 +96,11 @@ public class Game extends Application {
         return gameBoard;
     }
 
-    /*
-    Creates the player button.
+    /**
+     * Creates the player button.
+     * @return playerButton as a Button
      */
-    private Button createPlayerButton() {
+    public Button createPlayerButton() {
         Button playerButton = new Button("Roll Dice");
         playerButton.setDisable(true);
         playerButton.setTranslateY(BUTTON_LINE);
@@ -105,10 +108,11 @@ public class Game extends Application {
         return playerButton;
     }
 
-    /*
-    Creates the start button
+    /**
+     * Creates the start button.
+     * @return startButton as a Button
      */
-    private Button createStartButton(final Button playerButton) {
+    public Button createStartButton(final Button playerButton) {
         Button startButton = new Button("Start");
         startButton.setDisable(false);
         startButton.setTranslateY(BUTTON_LINE);
@@ -121,31 +125,37 @@ public class Game extends Application {
         return startButton;
     }
 
-    /*
-    Creates the player label.
+    /**
+     * Creates the player label.
+     * @return playerLabel as a Label
      */
-    private Label createPlayerLabel() {
+    Label createPlayerLabel() {
         Label playerLabel = new Label();
         playerLabel.setTranslateY(DESCRIPTION_LINE);
         playerLabel.setTranslateX(PLAYER_LABEL_X_COORD);
         return playerLabel;
     }
 
-    /*
-    Creates the start label.
+    /**
+     * Creates the start label.
+     * @return startLabel as a Label
      */
-    private Label createStartLabel() {
+    Label createStartLabel() {
         Label startLabel = new Label("Start");
         startLabel.setTranslateY(DESCRIPTION_LINE);
         startLabel.setTranslateX(START_LABEL_X_COORD);
         return startLabel;
     }
 
-    /*
-    Sets the start and player button's event handlers in the game.
+    /**
+     * Sets the start and player button's event handlers in the game.
+     * @param playerButton as a Button
+     * @param startButton as a Button
+     * @param playerLabel as a Label
+     * @param startLabel as a Label
      */
-    private void setEventHandlers(final Button playerButton, final Button startButton,
-                                  final Label playerLabel, final Label startLabel) {
+    public void setEventHandlers(final Button playerButton, final Button startButton,
+                          final Label playerLabel, final Label startLabel) {
         startButton.setOnAction(event -> {
             playerButton.setDisable(false);
             startButton.setDisable(true);
@@ -169,10 +179,11 @@ public class Game extends Application {
             });
     }
 
-    /*
-    Creates the user interface for gameplay.
+    /**
+     * Creates the user interface for gameplay.
+     * @return root as a Pane
      */
-    private Pane createContent() {
+    public Pane createContent() {
         Pane root = createRootPane();
         addSpaces(root);
 
@@ -195,8 +206,12 @@ public class Game extends Application {
         return root;
     }
 
+    /**
+     * Begins the setup for the gameplay.
+     * @param stage as a Stage
+     */
     @Override
-    public void start(final Stage stage) throws IOException {
+    public void start(final Stage stage) {
         Scene scene = new Scene(createContent());
         stage.setTitle("Omnipotent Six");
         stage.setScene(scene);
