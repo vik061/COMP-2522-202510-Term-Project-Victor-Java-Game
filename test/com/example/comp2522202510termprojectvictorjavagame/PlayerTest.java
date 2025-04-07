@@ -72,4 +72,26 @@ class PlayerTest {
         player.setPosition(100);
         assertTrue(player.reachedEnd());
     }
+
+    @Test
+    void testEqualsWithDifferentPlayers() {
+        Player player1 = new Player(50, Color.RED);
+        Player player2 = new Player(50, Color.BLUE);
+        assertFalse(player1.equals(player2));
+    }
+
+    @Test
+    void testHashCodeConsistency() {
+        Player player = new Player(50, Color.RED);
+        int hashCode = player.hashCode();
+        assertEquals(hashCode, player.hashCode());
+    }
+
+    @Test
+    void testToStringFormat() {
+        Player player = new Player(50, Color.RED);
+        String expected = "Player{playerPiece=Circle";
+        assertTrue(player.toString().contains(expected));
+    }
+
 }

@@ -23,7 +23,7 @@ public class BoardTest {
     }
 
     @Test
-    void testGetNewPositionInvalidfRange() {
+    void testGetNewPositionInvalidRange() {
         int newPosition = board.getNewPosition(invalidNonOmnipotentPosition);
         assertEquals(-1, newPosition);
     }
@@ -50,5 +50,26 @@ public class BoardTest {
     void testGetYCoordinateInvalidRange() {
         int yCoordinate = board.getYCoordinate(invalidNonOmnipotentPosition);
         assertEquals(-1, yCoordinate);
+    }
+
+    @Test
+    void testEqualsDifferentBoards() {
+        Board board1 = new Board();
+        Board board2 = new Board();
+        assertFalse(board2.equals(board1));
+    }
+
+    @Test
+    void testHashCode() {
+        Board board = new Board();
+        int hashCode = board.hashCode();
+        assertEquals(hashCode, board.hashCode());
+    }
+
+    @Test
+    void testToString() {
+        Board board = new Board();
+        String expected = "Board{coordinates=[";
+        assertTrue(board.toString().contains(expected));
     }
 }

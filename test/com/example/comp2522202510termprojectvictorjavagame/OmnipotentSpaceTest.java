@@ -35,4 +35,24 @@ public class OmnipotentSpaceTest {
         assertEquals(expectedOmnipotentPosition, space.getOmnipotentPosition());
     }
 
+    @Test
+    void testEqualsDifferentValues() {
+        OmnipotentSpace space1 = new OmnipotentSpace(10, 6);
+        OmnipotentSpace space2 = new OmnipotentSpace(67, 66);
+        assertFalse(space1.equals(space2));
+    }
+
+    @Test
+    void testHashCodeSameOmnipotentSpaces() {
+        OmnipotentSpace space1 = new OmnipotentSpace(10, 6);
+        OmnipotentSpace space2 = new OmnipotentSpace(10, 6);
+        assertEquals(space1.hashCode(), space2.hashCode());
+    }
+
+    @Test
+    void testToString() {
+        OmnipotentSpace space = new OmnipotentSpace(10, 6);
+        String expected = "OmnipotentSpace{omnipotentPosition=10}";
+        assertEquals(expected, space.toString());
+    }
 }
