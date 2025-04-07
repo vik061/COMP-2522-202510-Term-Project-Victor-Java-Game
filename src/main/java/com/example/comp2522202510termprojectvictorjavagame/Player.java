@@ -70,12 +70,15 @@ public class Player {
         moveAnimation(dieValue);
     }
 
-    /*
-    Implements animation for player's piece to move across the board.
+    /**
+     * Implements animation for player's piece to move across the board.
+     * @param dieValue
+     * @return move as a TranslateTransition
      */
     TranslateTransition moveAnimation(final int dieValue) {
-        TranslateTransition move = new TranslateTransition(Duration.millis(DICE_ANIMATION_DURATION * dieValue),
-                                                                                playerPiece);
+        TranslateTransition move = new TranslateTransition(
+                                        Duration.millis(DICE_ANIMATION_DURATION * dieValue),
+                                                        playerPiece);
         move.setToX(GAME_BOARD.getXCoordinate(position));
         move.setToY(GAME_BOARD.getYCoordinate(position));
         move.setAutoReverse(false);
@@ -139,7 +142,8 @@ public class Player {
             String line = reader.readLine();
             return Integer.parseInt(line);
         } catch (IOException | NumberFormatException error) {
-            System.err.println("Error loading player position, defaulting to start: " + error.getMessage());
+            System.err.println("Error loading player position, defaulting to start: "
+                                + error.getMessage());
             return 0;
         }
     }
