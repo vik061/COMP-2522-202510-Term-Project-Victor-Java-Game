@@ -34,12 +34,12 @@ public class Board {
                 if (heightIndex % 2 == 0) {
                     xCoord = widthIndex * Game.getSpaceSize() + Game.getSpaceSize() / 2;
                 } else {
-                    xCoord = Game.getSpaceSize() * Game.getHeight() - (widthIndex * Game.getSpaceSize())
-                            - Game.getSpaceSize() / 2;
+                    xCoord = Game.getSpaceSize() * Game.getHeight()
+                            - (widthIndex * Game.getSpaceSize()) - Game.getSpaceSize() / 2;
 
                 }
-                int yCoord = Game.getSpaceSize() * Game.getHeight() - (heightIndex * Game.getSpaceSize())
-                        - Game.getSpaceSize() / 2;
+                int yCoord = Game.getSpaceSize() * Game.getHeight()
+                        - (heightIndex * Game.getSpaceSize()) - Game.getSpaceSize() / 2;
                 coordinates.add(new Pair<>(xCoord, yCoord));
             }
         }
@@ -97,9 +97,12 @@ public class Board {
 
     @Override
     public boolean equals(final Object object) {
-        if (object == null || getClass() != object.getClass()) return false;
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
         Board board = (Board) object;
-        return Objects.equals(coordinates, board.coordinates) && Objects.equals(omnipotentSpaces, board.omnipotentSpaces);
+        return Objects.equals(coordinates, board.coordinates)
+                && Objects.equals(omnipotentSpaces, board.omnipotentSpaces);
     }
 
     @Override
