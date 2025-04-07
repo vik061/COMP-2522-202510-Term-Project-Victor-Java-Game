@@ -58,4 +58,18 @@ class SpaceTest {
     void testGetPosition() {
         assertEquals(50, space.getPosition());
     }
+
+    @Test
+    void testHashCodeSameSpaces() {
+        Space space1 = new Space(10);
+        Space space2 = new Space(10);
+        assertEquals(space1.hashCode(), space2.hashCode());
+    }
+
+    @Test
+    void testToString() {
+        Space space = new Space(10);
+        String expected = "Space{position=10}";
+        assertEquals(expected, space.toString());
+    }
 }
