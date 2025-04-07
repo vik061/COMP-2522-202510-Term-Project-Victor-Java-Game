@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * Creates the Game's user interface for gameplay.
