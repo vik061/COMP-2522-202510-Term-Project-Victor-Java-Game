@@ -8,8 +8,6 @@ import org.junit.jupiter.api.BeforeAll;
 
 
 public class GameTest {
-    Game game = new Game();
-
     @BeforeAll
     static void initJavaFX() {
         try {
