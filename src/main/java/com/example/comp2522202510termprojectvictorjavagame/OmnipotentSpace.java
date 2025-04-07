@@ -31,9 +31,11 @@ public class OmnipotentSpace extends Space {
      */
     public static int determineNewPosition(final int omnipotentPosition) {
         Random random = new Random();
-        int omnipotentForce = omnipotentPosition + (random.nextInt(BOUND_NUMBER) + 1) * (random.nextInt(2) * 2 - 1);
+        int omnipotentForce = omnipotentPosition + (random.nextInt(BOUND_NUMBER) + 1)
+                * (random.nextInt(2) * 2 - 1);
         if (omnipotentForce > WIN_NUMBER) {
-            return ((WIN_NUMBER - omnipotentPosition) - (omnipotentForce - WIN_NUMBER) + omnipotentPosition);
+            return ((WIN_NUMBER - omnipotentPosition) - (omnipotentForce - WIN_NUMBER)
+                    + omnipotentPosition);
         } else {
             return omnipotentForce;
         }
