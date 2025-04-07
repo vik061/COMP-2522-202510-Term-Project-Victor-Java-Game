@@ -227,27 +227,4 @@ public class Game extends Application {
     public static void main(final String[] args) {
         launch();
     }
-
-    @Override
-    public boolean equals(final Object object) {
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-        Game game = (Game) object;
-        return Objects.equals(playerOne, game.playerOne);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(playerOne);
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sbuilder = new StringBuilder("Game{");
-        sbuilder.append("playerOne=");
-        sbuilder.append(playerOne);
-        sbuilder.append('}');
-        return sbuilder.toString();
-    }
 }
