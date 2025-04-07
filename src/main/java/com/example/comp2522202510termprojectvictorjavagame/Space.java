@@ -2,6 +2,8 @@ package com.example.comp2522202510termprojectvictorjavagame;
 
 import javafx.scene.shape.Rectangle;
 
+import java.util.Objects;
+
 /**
  * Creates spaces on board as reference for positioning purposes.
  *
@@ -9,7 +11,7 @@ import javafx.scene.shape.Rectangle;
  * @version 2025
  */
 public class Space extends Rectangle {
-    private int position;
+    private final int position;
 
     /**
      * Initializes Space with values to position.
@@ -43,6 +45,11 @@ public class Space extends Rectangle {
      */
     public int getPosition() {
         return position;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position);
     }
 
     @Override
